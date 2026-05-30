@@ -7,23 +7,24 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
     title: '',
     description: '',
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
-    // Clear error when user starts typing
+
     if (error) setError(null);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation
     if (!formData.title.trim() || !formData.description.trim()) {
       setError('Both title and description are required');
       return;
@@ -38,14 +39,11 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
         description: formData.description.trim(),
       });
 
-      if (result.success) {
-        // Dialog will be closed by parent component
-      } else {
+      if (!result.success) {
         setError(result.error || 'Failed to create task');
       }
     } catch (err) {
       console.log(err);
-
       setError('An unexpected error occurred');
     } finally {
       setIsSubmitting(false);
@@ -64,12 +62,16 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
       onClick={handleBackdropClick}
     >
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-xl font-semibold text-gray-900">Add New Task</h2>
+        <div className="flex items-center justify-between p-6 border-b border-violet-200">
+          <h2 className="text-xl font-semibold text-violet-700">
+            Add New Task
+          </h2>
+
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
+            className="text-violet-400 hover:text-violet-600 transition-colors duration-200"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -84,16 +86,22 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6">
+
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
-              <p className="text-red-700 text-sm">{error}</p>
+            <div className="mb-4 p-3 bg-violet-50 border border-violet-200 rounded-md">
+              <p className="text-violet-700 text-sm">{error}</p>
             </div>
           )}
 
+          {/* Task Title */}
           <div className="mb-4">
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-violet-700 mb-2"
+            >
               Task Title *
             </label>
+
             <input
               type="text"
               id="title"
@@ -102,16 +110,24 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
               onChange={handleChange}
               placeholder="Enter task title..."
               maxLength={100}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
               disabled={isSubmitting}
+              className="w-full px-3 py-2 border border-violet-300 rounded-md shadow-sm text-violet-700 placeholder-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors duration-200"
             />
-            <p className="text-xs text-gray-500 mt-1">{formData.title.length}/100 characters</p>
+
+            <p className="text-xs text-violet-500 mt-1">
+              {formData.title.length}/100 characters
+            </p>
           </div>
 
+          {/* Description */}
           <div className="mb-6">
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-violet-700 mb-2"
+            >
               Description *
             </label>
+
             <textarea
               id="description"
               name="description"
@@ -120,27 +136,34 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
               placeholder="Enter task description..."
               rows={4}
               maxLength={500}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 resize-none"
               disabled={isSubmitting}
+              className="w-full px-3 py-2 border border-violet-300 rounded-md shadow-sm text-violet-700 placeholder-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 transition-colors duration-200 resize-none"
             />
-            <p className="text-xs text-gray-500 mt-1">
+
+            <p className="text-xs text-violet-500 mt-1">
               {formData.description.length}/500 characters
             </p>
           </div>
 
           {/* Actions */}
           <div className="flex justify-end space-x-3">
+
             <button
               type="button"
               onClick={onClose}
               disabled={isSubmitting}
-              className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-50"
+              className="px-4 py-2 text-violet-700 bg-violet-100 hover:bg-violet-200 rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 disabled:opacity-50"
             >
               Cancel
             </button>
+
             <button
               type="submit"
-              disabled={isSubmitting || !formData.title.trim() || !formData.description.trim()}
+              disabled={
+                isSubmitting ||
+                !formData.title.trim() ||
+                !formData.description.trim()
+              }
               className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
             >
               {isSubmitting ? (
@@ -164,6 +187,7 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
                 'Create Task'
               )}
             </button>
+
           </div>
         </form>
       </div>
