@@ -64,14 +64,14 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
 
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-orange-200">
-          <h2 className="text-xl font-semibold text-orange-700">
+        <div className="flex items-center justify-between p-6 border-b border-pink-200">
+          <h2 className="text-xl font-semibold text-pink-700">
             Add New Task
           </h2>
 
           <button
             onClick={onClose}
-            className="text-orange-400 hover:text-orange-600 transition-colors duration-200"
+            className="text-pink-400 hover:text-pink-600 transition-colors duration-200"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -88,8 +88,8 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
         <form onSubmit={handleSubmit} className="p-6">
 
           {error && (
-            <div className="mb-4 p-3 bg-orange-50 border border-orange-200 rounded-md">
-              <p className="text-orange-700 text-sm">{error}</p>
+            <div className="mb-4 p-3 bg-pink-50 border border-pink-200 rounded-md">
+              <p className="text-pink-700 text-sm">{error}</p>
             </div>
           )}
 
@@ -97,7 +97,7 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
           <div className="mb-4">
             <label
               htmlFor="title"
-              className="block text-sm font-medium text-orange-700 mb-2"
+              className="block text-sm font-medium text-pink-700 mb-2"
             >
               Task Title *
             </label>
@@ -111,10 +111,10 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
               placeholder="Enter task title..."
               maxLength={100}
               disabled={isSubmitting}
-              className="w-full px-3 py-2 border border-orange-300 rounded-md shadow-sm text-orange-700 placeholder-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200"
+              className="w-full px-3 py-2 border border-pink-300 rounded-md shadow-sm text-pink-700 placeholder-pink-300 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors duration-200"
             />
 
-            <p className="text-xs text-orange-500 mt-1">
+            <p className="text-xs text-pink-500 mt-1">
               {formData.title.length}/100 characters
             </p>
           </div>
@@ -123,7 +123,7 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
           <div className="mb-6">
             <label
               htmlFor="description"
-              className="block text-sm font-medium text-orange-700 mb-2"
+              className="block text-sm font-medium text-pink-700 mb-2"
             >
               Description *
             </label>
@@ -137,10 +137,10 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
               rows={4}
               maxLength={500}
               disabled={isSubmitting}
-              className="w-full px-3 py-2 border border-orange-300 rounded-md shadow-sm text-orange-700 placeholder-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200 resize-none"
+              className="w-full px-3 py-2 border border-pink-300 rounded-md shadow-sm text-pink-700 placeholder-pink-300 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors duration-200 resize-none"
             />
 
-            <p className="text-xs text-orange-500 mt-1">
+            <p className="text-xs text-pink-500 mt-1">
               {formData.description.length}/500 characters
             </p>
           </div>
@@ -152,7 +152,7 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
               type="button"
               onClick={onClose}
               disabled={isSubmitting}
-              className="px-4 py-2 text-orange-700 bg-orange-100 hover:bg-orange-200 rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 disabled:opacity-50"
+              className="px-4 py-2 text-pink-700 bg-pink-100 hover:bg-pink-200 rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 disabled:opacity-50"
             >
               Cancel
             </button>
@@ -164,7 +164,7 @@ const AddTaskDialog = ({ onClose, onSubmit }) => {
                 !formData.title.trim() ||
                 !formData.description.trim()
               }
-              className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+              className="px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
             >
               {isSubmitting ? (
                 <>
