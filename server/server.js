@@ -2,7 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const dns = require('dns');
 const taskRoutes = require('./routes/tasks');
+
+// Set DNS servers to Google DNS to prevent ECONNREFUSED/ENOTFOUND on Node's c-ares DNS resolver
+try {
+  dns.setServers(['8.8.8.8', '8.8.4.4']);
+} catch (e) {
+  console.warn('Warning: Could not set fallback DNS servers:', e);
+}
 
 // Load environment variables
 dotenv.config();

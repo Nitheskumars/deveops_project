@@ -7,15 +7,20 @@ const TaskCard = ({ task, onDelete }) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
+    console.log(`[TaskCard] Delete icon clicked for task: ${task.title} (ID: ${task._id})`);
     if (window.confirm("Are you sure you want to delete this task?")) {
+      console.log(`[TaskCard] Delete confirmed by user. Invoking onDelete...`);
       setIsDeleting(true);
       try {
         await onDelete(task._id);
+        console.log(`[TaskCard] onDelete callback completed for task: ${task._id}`);
       } catch (error) {
-        console.error("Error deleting task:", error);
+        console.error("[TaskCard] Error during onDelete callback:", error);
       } finally {
         setIsDeleting(false);
       }
+    } else {
+      console.log(`[TaskCard] Delete cancelled by user.`);
     }
   };
 

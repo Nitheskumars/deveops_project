@@ -31,18 +31,29 @@ class TaskService {
   }
 
   async deleteTask(taskId) {
-    const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
-      method: "DELETE",
-    });
+    const url = `${API_BASE_URL}/tasks/${taskId}`;
+    console.log(`[TaskService] Attempting to delete task at URL: ${url}`);
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+      });
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(
-        errorData.message || `HTTP error! status: ${response.status}`
-      );
+      console.log(`[TaskService] Delete response status: ${response.status}`);
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error("[TaskService] Delete failed on server:", errorData);
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
+      }
+
+      const result = await response.json();
+      console.log("[TaskService] Delete succeeded:", result);
+      return result;
+    } catch (error) {
+      console.error("[TaskService] Network error or fetch exception:", error);
+      throw error;
     }
-
-    return await response.json();
   }
 }
 

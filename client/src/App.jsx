@@ -47,12 +47,18 @@ function App() {
   };
 
   const handleDeleteTask = async (taskId) => {
+    console.log(`[App] handleDeleteTask called with ID: ${taskId}`);
     try {
       await taskService.deleteTask(taskId);
-      setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
+      console.log(`[App] deleteTask service call returned. Updating local state for ID: ${taskId}`);
+      setTasks((prevTasks) => {
+        const filtered = prevTasks.filter((task) => task._id !== taskId);
+        console.log(`[App] Tasks filtered. Previous count: ${prevTasks.length}, New count: ${filtered.length}`);
+        return filtered;
+      });
     } catch (err) {
       setError('Failed to delete task. Please try again.');
-      console.error('Error deleting task:', err);
+      console.error('[App] Error inside handleDeleteTask:', err);
     }
   };
 
