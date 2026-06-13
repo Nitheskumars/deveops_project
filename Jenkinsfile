@@ -97,16 +97,20 @@ EOF
         always {
             echo '🧹 Cleaning up resources...'
             sh '''
-            echo "Stopping application containers..."
-            docker compose down || true
-
             echo "Cleaning up unused images..."
             docker image prune -f || true
             '''
         }
         success {
             echo '✅ Pipeline completed successfully!'
-            sh 'echo "Build #${BUILD_NUMBER} succeeded at $(date)"'
+            sh '''
+            echo "Build #${BUILD_NUMBER} succeeded at $(date)"
+            echo "=========================================================="
+            echo "🚀 APPLICATION IS LIVE!"
+            echo "Frontend URL: http://localhost:5173  (Replace localhost with your server IP if remote)"
+            echo "Backend API:  http://localhost:5000/api"
+            echo "=========================================================="
+            '''
         }
         failure {
             echo '❌ Pipeline failed!'
